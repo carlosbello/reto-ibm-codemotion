@@ -1,0 +1,16 @@
+{
+	"name": "RetoIBMCamio",
+	"version": "0.0.1",
+	"description": "Solución al reto #2: El Cambio. (Ver más en http://blog.codemotion.es/aceptas-el-reto-de-ibm/#reto1factoriales)",
+	"scripts": {
+		"start": "node app.js"
+	},
+	"dependencies": {
+		"express": "4.12.x",
+		"cfenv": "1.0.x"
+	},
+	"repository": {},
+	"engines": {
+		"node": "0.12.x"
+	} 
+}
