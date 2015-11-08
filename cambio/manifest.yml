@@ -3,6 +3,6 @@ applications:
   memory: 256M
   instances: 1
   domain: eu-gb.mybluemix.net
-  name: reto-ibm-factorial
-  host: reto-ibm-factorial
+  name: reto-ibm-cambio
+  host: reto-ibm-cambio
   disk_quota: 1024M

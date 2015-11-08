@@ -1,7 +1,7 @@
 {
-	"name": "NodejsStarterApp",
+	"name": "RetoIBMFactorial",
 	"version": "0.0.1",
-	"description": "A sample nodejs app for Bluemix",
+	"description": "Solución al reto #1: Factoriales. (Ver más en http://blog.codemotion.es/aceptas-el-reto-de-ibm/#reto1factoriales)",
 	"scripts": {
 		"start": "node app.js"
 	},
