@@ -3,40 +3,41 @@ function simbol(text) {
 }
 
 function coefficients(equation) {
-    return [+equation[1], simbol(equation[2]) * equation[3], +equation[4]];
+    return [+equation[1] || 1, simbol(equation[2]) * (equation[3] || 1), +equation[4]];
 }
 
-function extractCoefficientsMatrix(text) {
-    var equationParser = /(-?\d+)\s*x\s*(\+|\-)\s*(-?\d+)\s*y\s*=\s*(\-?\d+)/gi,
-        equation1 = equationParser.exec(text),
-        equation2 = equationParser.exec(text),
-        coefficients1 = coefficients(equation1),
-        coefficients2 = coefficients(equation2);
-    
-    return [coefficients1, coefficients2];
+function extractCoefficients(equationParser, text) {
+    var equation1 = equationParser.exec(text);
+    return equation1 ? coefficients(equation1) : null;
 }
 
 function toCoefficientsMatrixList(text) {
-    var lines = text.split('\n');
-    return lines.map(extractCoefficientsMatrix);
+    var coefficients,
+        count = 0,
+        list = [],
+        equationParser = /(-?\d+)?\s*x\s*(\+|\-)\s*(-?\d+)?\s*y\s*=\s*(\-?\d+)/gi;
+    while (coefficients = extractCoefficients(equationParser, text)) {
+        if (count === 0) list.push([]); 
+        list[list.length - 1][count] = coefficients;
+        count = (count + 1) % 2;
+    }
+    return list;
 }
 
 function extractData(text) {
     return text.replace(/#/gi, '').trim();
 }
 
-function isTwoEquationsPerLine(text) {
-    var lineValidator = /((-?\d+)\s*x\s*(\+|\-)\s*(-?\d+)\s*y\s*=\s*(\-?\d+)\s*){2}/i;
-    return text.split('\n').every(function (line) {
-        return lineValidator.exec(line);
-    });        
+function isEvenNumberOfEquations(text) {
+    var textValidator = /^((\s*(-?\d+)?\s*x\s*(\+|\-)\s*(-?\d+)?\s*y\s*=\s*(\-?\d+)\s*\n*){2})+$/i;
+    return text.match(textValidator);        
 }
 
 $(function () {
     $('#equationList').change(function () {
-        var errorMsg = "Por favor, entre dos ecuaciones por línea con la forma nx+my=c",
+        var errorMsg = "Por favor, entre un número par de ecuaciones con la forma nx+my=c",
             input = extractData($(this).val());
-        this.setCustomValidity(isTwoEquationsPerLine(input) ? '' : errorMsg);
+        this.setCustomValidity(isEvenNumberOfEquations(input) ? '' : errorMsg);
     });
     
     $('#frmFactorial').submit(function () {
