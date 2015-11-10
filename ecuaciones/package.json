@@ -1,6 +1,6 @@
 {
 	"name": "RetoIBMEcuaciones",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"description": "Solución al reto #3: 2 ecuaciones con 2 incógnitas. (Ver más en http://blog.codemotion.es/aceptas-el-reto-de-ibm/#reto32ecuacionescon2incgnitas)",
 	"scripts": {
 		"start": "node app.js"
